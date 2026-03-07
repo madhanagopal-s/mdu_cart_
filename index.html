@@ -763,6 +763,10 @@
     .bulk-card {
       min-width: 0 !important;
     }
+    /* enterprise card full width */
+    .bulk-grid .bulk-card:nth-child(3) {
+      grid-column: 1 / -1 !important;
+    }
     /* Mobile testimonials - 2 columns */
     .testimonials-grid {
       grid-template-columns: repeat(2, 1fr) !important;
@@ -803,6 +807,9 @@
     .bulk-grid {
       grid-template-columns: repeat(2, 1fr) !important;
       gap: 12px !important;
+    }
+    .bulk-grid .bulk-card:nth-child(3) {
+      grid-column: 1 / -1 !important;
     }
     /* Testimonials for very small screens - keep 2 columns */
     .testimonials-grid {
