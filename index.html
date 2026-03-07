@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MDU Cart — Wholesale Hub</title>
+<meta name="description" content="Wholesale supplier of premium lifestyle products including insulated water bottles, panda humidifiers, and sports accessories. Bulk pricing for retailers and businesses.">
+<meta name="keywords" content="wholesale, bulk products, water bottles, humidifiers, sports accessories, MDU Cart, wholesale supplier, lifestyle products">
+<meta property="og:title" content="MDU Cart — Wholesale Hub">
+<meta property="og:description" content="Premium wholesale products for bulk buyers. Quality assured with fast shipping worldwide.">
+<meta property="og:image" content="./images/logo.png">
+<meta property="og:url" content="https://mducart.com">
+<meta property="og:type" content="website">
+<link rel="icon" href="./images/favicon.ico" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f0f;
+    --text: #ffffff;
+    --muted: #b0b0b0;
+    --accent: #00d4ff;
+    --accent2: #ff4081;
+    --accent3: #ffd700;
+    --glass: rgba(255,255,255,0.05);
+    --glass-border: rgba(255,255,255,0.1);
+    --glass-hover: rgba(255,255,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* ── BACKGROUND BLOBS ── */
+  .bg {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    overflow: hidden;
+  }
+  .blob {
+    position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.35;
+    animation: drift 18s infinite alternate ease-in-out;
+  }
+  .blob1 { width: 600px; height: 600px; background: #e6fffa; top: -150px; left: -100px; animation-delay: 0s; }
+  .blob2 { width: 500px; height: 500px; background: #fed7d7; bottom: -100px; right: -100px; animation-delay: 4s; }
+  .blob3 { width: 400px; height: 400px; background: #e2e8f0; top: 40%; left: 50%; animation-delay: 8s; }
+  .blob4 { width: 350px; height: 350px; background: #fefcbf; bottom: 30%; left: 10%; animation-delay: 12s; }
+
+  @keyframes drift {
+    0% { transform: translate(0,0) scale(1); }
+    100% { transform: translate(40px, 30px) scale(1.12); }
+  }
+
+  /* ── GLASS MIXIN ── */
+  .glass {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 20px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 40px;
+    background: rgba(10,14,26,0.6);
+    backdrop-filter: blur(24px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .logo {
+    width: 110px; height: 60px; 
+    
+    border-radius: 12px;
+    padding: 8px;
+    object-fit: contain;
+    
+  }
+  .brand {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.6rem; font-weight: 800;
+    letter-spacing: -1px;
+    margin-right: 20px;
+  }
+  .brand-m {
+    color: #00d4ff;
+  }
+  .brand-du {
+    color: #ff4081;
+  }
+  .brand-cart {
+    color: #ffd700;
+  }
+  .nav-links { display: flex; gap: 28px; list-style: none; margin: 0; padding: 0; margin-left: 10cm; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500; transition: color .2s; white-space: nowrap; }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+  }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--accent), #00aaff);
+    color: #0a0e1a; padding: 9px 22px; border-radius: 50px;
+    font-weight: 700; font-size: 0.85rem; text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 0 20px rgba(0,245,196,0.3);
+  }
+  .nav-cta:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(0,245,196,0.5); }
+
+
+  /* ── SECTIONS ── */
+  section { position: relative; z-index: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 100px 20px 60px;
+    position: relative;
+  }
+  #hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('./images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    z-index: -1;
+  }
+  .hero-content { max-width: 800px; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(183,148,246,0.12);
+    border: 1px solid rgba(183,148,246,0.3);
+    color: var(--accent); padding: 6px 18px; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 24px;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800; line-height: 1.05;
+    animation: fadeUp 0.8s 0.15s ease both;
+  }
+  .hero-title .grad {
+    background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    margin: 20px auto; color: var(--muted); font-size: 1.1rem;
+    max-width: 540px; line-height: 1.7;
+    animation: fadeUp 0.8s 0.3s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    margin-top: 36px; animation: fadeUp 0.8s 0.45s ease both;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    color: #fff; padding: 14px 32px; border-radius: 50px;
+    font-weight: 700; font-size: 1rem; text-decoration: none;
+    box-shadow: 0 0 30px rgba(183,148,246,0.3); transition: transform .2s, box-shadow .2s;
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(183,148,246,0.45); }
+  .btn-outline {
+    border: 1.5px solid rgba(255,255,255,0.25); color: var(--text);
+    padding: 14px 32px; border-radius: 50px; font-weight: 600;
+    font-size: 1rem; text-decoration: none; backdrop-filter: blur(10px);
+    transition: border-color .2s, background .2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); background: rgba(0,245,196,0.08); }
+
+  /* hero floating cards */
+  .hero-stats {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+    margin-top: 56px; animation: fadeUp 0.8s 0.6s ease both;
+  }
+  .stat-card {
+    padding: 18px 28px; text-align: center;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(16px); border-radius: 16px;
+  }
+  .stat-card .num {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat-card .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+  /* ── SCROLL FADE ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── FLOATING SOCIAL ICONS ── */
+  .floating-social {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .social-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00d4ff, #00aaff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: float 3s ease-in-out infinite;
+  }
+  .social-icon:hover, .social-icon:focus {
+    transform: scale(1.15);
+    box-shadow: 0 8px 30px rgba(0,212,255,0.6);
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
+  .wa-icon {
+    background: linear-gradient(135deg, #25D366, #20ba58);
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  }
+  .wa-icon:hover {
+    box-shadow: 0 8px 30px rgba(37,211,102,0.6);
+  }
+  .ig-icon {
+    background: linear-gradient(135deg, #e1306c, #c13584);
+    box-shadow: 0 4px 20px rgba(225,48,108,0.4);
+  }
+  .ig-icon:hover {
+    box-shadow: 0 8px 30px rgba(225,48,108,0.6);
+  }
+  .phone-icon {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    box-shadow: 0 4px 20px rgba(255,212,0,0.4);
+    color: #0a0e1a;
+  }
+  .phone-icon:hover {
+    box-shadow: 0 8px 30px rgba(255,212,0,0.6);
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+  }
+  @media(max-width:768px){
+    .floating-social { right: 15px; gap: 15px; }
+    .social-icon { width: 50px; height: 50px; font-size: 1.2rem; }
+  }
+
+  /* Back to Top Button */
+  #back-to-top {
+    position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px;
+    background: var(--accent); color: #000; border: none; border-radius: 50%;
+    font-size: 1.5rem; font-weight: bold; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,212,255,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: none; z-index: 2001;
+  }
+  #back-to-top:hover, #back-to-top:focus {
+    transform: scale(1.1); box-shadow: 0 8px 30px rgba(0,212,255,0.6);
+    outline: 2px solid var(--accent); outline-offset: 2px;
+  }
+  @media(max-width:768px){ #back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 1.3rem; } }
+
+  /* ── PRODUCT MODAL ── */
+  .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.75); backdrop-filter: blur(8px);
+    display: none; justify-content: center; align-items: center;
+    z-index: 2000; animation: fadeIn 0.3s ease;
+  }
+  .modal-content {
+    background: linear-gradient(145deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+    border-radius: 20px; border: 1px solid rgba(255,255,255,0.3);
+    max-width: 380px; width: 90%; max-height: 600px; overflow: hidden;
+    position: relative; box-shadow: 0 30px 100px rgba(0,0,0,0.5);
+    animation: slideUp 0.4s ease;
+  }
+  .modal-close-btn {
+    position: absolute; top: 15px; right: 15px;
+    background: rgba(255,59,48,0.1); border: none; border-radius: 50%;
+    width: 36px; height: 36px; font-size: 1.6rem; cursor: pointer;
+    z-index: 10; transition: all 0.3s ease; color: #ff3b30;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: bold;
+  }
+  .modal-close-btn:hover { background: rgba(255,59,48,0.2); transform: scale(1.1); }
+  .modal-image {
+    width: 100%; height: 280px; overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+  }
+  .modal-image::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(45deg, rgba(0,0,0,0.2), transparent 60%);
+  }
+  .modal-image img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .modal-details {
+    padding: 25px;
+  }
+  .modal-details h2 {
+    font-family: 'Syne', sans-serif; font-size: 1.5rem; margin-bottom: 18px;
+    color: #1a1a1a; text-align: center; font-weight: 700;
+    line-height: 1.3;
+  }
+  .modal-info {
+    margin-bottom: 25px; background: linear-gradient(135deg, rgba(0,123,255,0.05), rgba(0,123,255,0.02));
+    border-radius: 12px; padding: 20px; border: 1px solid rgba(0,123,255,0.1);
+  }
+  .info-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid rgba(0,123,255,0.1);
+    font-size: 1rem; font-weight: 500; color: #333;
+  }
+  .info-item:last-child { border-bottom: none; }
+  .info-item strong { color: #007bff; font-weight: 700; }
+  .modal-buttons {
+    display: flex; gap: 12px; justify-content: center;
+  }
+  .btn-primary {
+    padding: 14px 32px; background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white; border: none; border-radius: 12px;
+    font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+    font-size: 1rem; box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,123,255,0.4); }
+  .btn-secondary {
+    padding: 14px 32px; background: linear-gradient(135deg, rgba(108,117,125,0.1), rgba(108,117,125,0.05));
+    color: #6c757d; border: 1px solid rgba(108,117,125,0.2); border-radius: 12px;
+    font-weight: 600; cursor: pointer; transition: all 0.3s ease;
+    font-size: 1rem;
+  }
+  .btn-secondary:hover { background: linear-gradient(135deg, rgba(108,117,125,0.15), rgba(108,117,125,0.08)); transform: translateY(-2px); }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { transform: translateY(60px) scale(0.9); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+  @media(max-width:640px){
+    .modal-content { width: 95%; margin: 20px; }
+    .modal-details { padding: 25px 20px 20px; }
+    .modal-details h2 { font-size: 1.4rem; }
+    .modal-buttons { flex-direction: column; gap: 12px; }
+    .btn-primary, .btn-secondary { width: 100%; padding: 16px; }
+  }
+
+  /* ── SECTION HEADER ── */
+  .sec-header { text-align: center; margin-bottom: 50px; }
+  .sec-tag {
+    display: inline-block; padding: 5px 16px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .tag-cyan { background: rgba(104,211,145,0.12); border: 1px solid rgba(104,211,145,0.3); color: var(--accent2); }
+  .tag-pink { background: rgba(251,182,206,0.12); border: 1px solid rgba(251,182,206,0.3); color: var(--accent3); }
+  .tag-gold { background: rgba(255,218,185,0.12); border: 1px solid rgba(255,218,185,0.3); color: #ed8936; }
+  .sec-header h2 {
+    font-family: 'Syne', sans-serif; font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 800; line-height: 1.2;
+  }
+  .sec-header p { color: var(--muted); margin-top: 12px; font-size: 1rem; }
+
+  /* ── PRODUCTS ── */
+  #products { padding: 90px 40px; position: relative; }
+  #products::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('./images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+  }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px; max-width: 1200px; margin: 0 auto;
+  }
+  .product-card {
+    background: linear-gradient(135deg, #1a3a3f, #0f2f34);
+    border: 1px solid rgba(0,212,255,0.2);
+    backdrop-filter: blur(20px); border-radius: 24px;
+    overflow: hidden; transition: transform .3s, box-shadow .3s;
+    cursor: pointer;
+  }
+  .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,212,255,0.2); }
+  .prod-img {
+    width: 100%; height: 220px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .prod-img .carousel {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  }
+  .prod-img .carousel img {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
+    opacity: 0; transition: opacity 0.5s ease;
+  }
+  .prod-bg1 { background: linear-gradient(135deg, #1a1a1a, #2d2d2d); }
+  .prod-bg2 { background: linear-gradient(135deg, #2d1a1a, #4d2d2d); }
+  .prod-bg3 { background: linear-gradient(135deg, #1a2d1a, #2d4d2d); }
+  .prod-bg4 { background: linear-gradient(135deg, #2d2d1a, #4d4d2d); }
+  .prod-bg5 { background: linear-gradient(135deg, #1a1a2d, #2d2d4d); }
+  .prod-bg6 { background: linear-gradient(135deg, #2d1a2d, #4d2d4d); }
+  .prod-info { padding: 20px; }
+  .prod-info h3 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: #ffffff; }
+  .prod-info p { font-size: 0.83rem; color: #a8b8b8; margin-top: 6px; line-height: 1.5; }
+  .prod-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px; }
+  .prod-tag {
+    font-size: 0.7rem; padding: 4px 12px; border-radius: 50px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+    color: #b0c0c0;
+  }
+  .prod-price { margin-top: 14px; font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #00d4ff; }
+
+  /* ── BULK ORDER ── */
+  #bulk { padding: 90px 40px; position: relative; }
+  #bulk::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('./images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+  }
+  .bulk-wrap { max-width: 1100px; margin: 0 auto; }
+  .bulk-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .bulk-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.13);
+    backdrop-filter: blur(20px); border-radius: 24px;
+    padding: 32px 28px; position: relative; overflow: hidden;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .bulk-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(0,0,0,0.4); }
+  .bulk-card.featured {
+    border-color: rgba(0,245,196,0.4);
+    background: rgba(0,245,196,0.06);
+  }
+  .bulk-card.featured::before {
+    content: '★ BEST VALUE';
+    position: absolute; top: 16px; right: -26px;
+    background: var(--accent); color: #0a0e1a;
+    font-size: 0.65rem; font-weight: 800; letter-spacing: 1px;
+    padding: 4px 36px; transform: rotate(35deg);
+  }
+  .bulk-tier { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .bulk-qty { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; margin: 8px 0 4px; }
+  .bulk-qty span { font-size: 1rem; font-weight: 400; color: var(--muted); }
+  .bulk-price {
+    font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), #00aaff);
+    background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin: 12px 0;
+  }
+  .bulk-price .unit { font-size: 0.9rem; -webkit-text-fill-color: var(--muted); color: var(--muted); }
+  .bulk-features { list-style: none; margin: 18px 0; }
+  .bulk-features li {
+    padding: 7px 0; font-size: 0.87rem; color: var(--muted);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .bulk-features li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+  .bulk-btn {
+    display: block; text-align: center; padding: 12px;
+    border-radius: 50px; font-weight: 700; font-size: 0.9rem;
+    text-decoration: none; transition: transform .2s, box-shadow .2s; margin-top: 20px;
+  }
+  .bulk-btn-ghost { border: 1.5px solid rgba(255,255,255,0.2); color: var(--text); }
+  .bulk-btn-ghost:hover { border-color: var(--accent); background: rgba(0,245,196,0.08); }
+  .bulk-btn-solid {
+    background: linear-gradient(135deg, var(--accent), #00aaff); color: #0a0e1a;
+    box-shadow: 0 0 24px rgba(0,245,196,0.3);
+  }
+  .bulk-btn-solid:hover { transform: scale(1.04); box-shadow: 0 0 36px rgba(0,245,196,0.5); }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { padding: 90px 40px; position: relative; }
+  #testimonials::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('./images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08;
+    z-index: -1;
+  }
+  .testimonials-wrap { max-width: 1000px; margin: 0 auto; }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .testimonial-card {
+    padding: 30px 28px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px); border-radius: 22px;
+    transition: transform .3s, border-color .3s;
+  }
+  .testimonial-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+  .testimonial-card .stars { font-size: 1rem; margin-bottom: 12px; }
+  .testimonial-text { font-size: 0.95rem; line-height: 1.6; color: var(--text); margin-bottom: 16px; font-style: italic; }
+  .testimonial-author { font-size: 0.85rem; font-weight: 600; color: var(--accent2); }
+
+  /* ── SHIPPING ── */
+  #shipping { padding: 90px 40px; position: relative; }
+  #shipping::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('./images/bg_ship.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+  }
+  .shipping-wrap { max-width: 1400px; margin: 0 auto; }
+  .shipping-flow {
+    display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center;
+  }
+  .ship-step {
+    text-align: center; padding: 20px 16px; flex: 1 1 160px; min-width: 140px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(16px); border-radius: 20px;
+    position: relative; transition: transform .3s;
+  }
+  .ship-step:hover { transform: translateY(-5px); }
+  .ship-icon { font-size: 2.2rem; margin-bottom: 8px; display: block; }
+  .ship-step h4 { font-family: 'Syne', sans-serif; font-size: 0.9rem; font-weight: 700; }
+  .ship-step p { font-size: 0.75rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  .ship-arrow {
+    text-align: center; font-size: 1.2rem; color: var(--accent);
+    animation: pulse 1.5s infinite; flex: 0 0 auto; padding: 0 8px;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+  /* shipping countries banner */
+  .countries-banner {
+    margin-top: 40px; padding: 28px 32px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(16px); border-radius: 20px;
+    text-align: center;
+  }
+  .countries-banner h4 { font-family: 'Syne', sans-serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+  .flag-row { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+  .flag-badge {
+    padding: 6px 14px; border-radius: 50px; font-size: 0.82rem;
+    background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+  }
+
+  /* ── CONTACT ── */
+  #contact { padding: 90px 40px 60px; position: relative; }
+  #contact::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: url('./images/bg.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: -1;
+  }
+  .contact-wrap { max-width: 1200px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media(max-width:1024px){ .contact-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media(max-width:640px){ .contact-grid { grid-template-columns: 1fr; } }
+  .contact-card {
+    padding: 30px 28px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px); border-radius: 22px;
+    transition: transform .3s, box-shadow .3s;
+    text-decoration: none; color: inherit; display: block;
+  }
+  .contact-card:hover { transform: translateY(-5px); box-shadow: 0 14px 40px rgba(0,0,0,0.35); }
+  .contact-card .ci { font-size: 2.4rem; margin-bottom: 14px; }
+  .contact-card h4 { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; }
+  .contact-card p { font-size: 0.85rem; color: var(--muted); margin-top: 5px; line-height: 1.5; }
+  .contact-card .link { margin-top: 10px; font-size: 0.88rem; font-weight: 600; }
+  .wa-card:hover { border-color: #25D366; box-shadow: 0 0 30px rgba(37,211,102,0.2); }
+  .wa-card .link { color: #25D366; }
+  .ig-card:hover { border-color: #e1306c; box-shadow: 0 0 30px rgba(225,48,108,0.2); }
+  .ig-card .link { color: #e1306c; }
+  .mail-card:hover { border-color: #4facfe; box-shadow: 0 0 30px rgba(79,172,254,0.2); }
+  .mail-card .link { color: #4facfe; }
+  .phone-card:hover { border-color: var(--accent3); box-shadow: 0 0 30px rgba(255,212,96,0.2); }
+  .phone-card .link { color: var(--accent3); }
+
+  .contact-map {
+    margin-top: 20px; padding: 28px 28px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(16px); border-radius: 22px;
+    text-align: center;
+  }
+
+  .newsletter {
+    margin-top: 30px; padding: 28px 28px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px); border-radius: 22px;
+    text-align: center;
+  }
+  .newsletter h3 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; margin-bottom: 10px; }
+  .newsletter p { font-size: 0.9rem; color: var(--muted); margin-bottom: 20px; }
+  .newsletter form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .newsletter input {
+    flex: 1; min-width: 200px; padding: 12px 16px; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px;
+    background: rgba(255,255,255,0.05); color: var(--text); font-size: 0.9rem;
+  }
+  .newsletter input:focus { outline: none; border-color: var(--accent); }
+  .newsletter .btn-primary { padding: 12px 20px; }
+  .contact-map h4 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+  .contact-map p { color: var(--muted); font-size: 0.88rem; line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1; text-align: center; padding: 36px 20px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    font-size: 0.85rem; color: var(--muted);
+  }
+  footer a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+  footer a:hover { color: var(--accent2); }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    overflow: hidden; padding: 18px 0;
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    position: relative; z-index: 1;
+  }
+  .marquee-track {
+    display: flex; gap: 40px; white-space: nowrap;
+    animation: marquee 25s linear infinite;
+  }
+  .marquee-item { font-size: 0.85rem; color: var(--muted); display: flex; align-items: center; gap: 10px; }
+  .marquee-item span { color: var(--accent); font-size: 1.1rem; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:768px){
+    nav { padding: 12px 20px; }
+    .nav-links { display: none; }
+    #products, #bulk, #shipping, #contact { padding: 60px 20px; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MDU Cart",
+  "url": "https://mducart.com",
+  "logo": "./images/logo.png",
+  "description": "Wholesale supplier of premium lifestyle products including insulated water bottles, panda humidifiers, and sports accessories. Bulk pricing for retailers and businesses.",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+91-99999-99999",
+    "contactType": "customer service",
+    "availableLanguage": "English"
+  },
+  "sameAs": [
+    "https://www.instagram.com/mdu_cart/",
+    "https://wa.me/9025570064"
+  ]
+}
+</script>
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+</head>
+<body>
+
+<!-- BG -->
+<div class="bg">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+  <div class="blob blob4"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <img src="./images/logo.png" alt="MDU Cart Logo" class="logo">
+  <ul class="nav-links">
+    <li><a href="#hero" id="home-link">Home</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#bulk">Bulk Orders</a></li>
+    <li><a href="#shipping">Shipping</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <span class="brand"><span class="brand-m">MDU</span><span class="brand-cart">Cart</span></span>
+    <a href="#bulk" class="nav-cta">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🌏 Trusted Wholesale Supplier</div>
+    <h1 class="hero-title">
+      Premium Products<br><span class="grad">Wholesale Prices</span>
+    </h1>
+    <p class="hero-sub">
+      Water bottles, panda humidifiers & lifestyle essentials — sourced &amp; shipped globally. Built for bulk buyers who mean business.
+    </p>
+    <div class="hero-btns">
+      <a href="#bulk" class="btn-primary">📦 View Bulk Prices</a>
+      <a href="#contact" class="btn-outline">💬 Contact Us</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-card reveal">
+        <div class="num">5000+</div>
+        <div class="lbl">Products Sold</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">20+</div>
+        <div class="lbl">States Served</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">100%</div>
+        <div class="lbl">Satisfaction Rate</div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="num">3–7</div>
+        <div class="lbl">Days Delivery</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Floating Social Icons -->
+  <div class="floating-social">
+    <a href="https://wa.me/9025570064" target="_blank" class="social-icon wa-icon" style="animation-delay: 0s;" aria-label="Contact us on WhatsApp">
+      <img src="https://img.icons8.com/color/48/whatsapp.png" alt="WhatsApp" width="32" height="32">
+    </a>
+    <a href="https://www.instagram.com/mdu_cart/" target="_blank" class="social-icon ig-icon" style="animation-delay: 0.15s;" aria-label="Follow us on Instagram">
+      <img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" width="32" height="32">
+    </a>
+    <a href="tel:+9025570064" class="social-icon phone-icon" style="animation-delay: 0.3s;" aria-label="Call us">
+      <img src="https://img.icons8.com/color/48/phone.png" alt="Phone" width="32" height="32">
+    </a>
+    <a href="https://share.google/Pg9uH4lt58CqvBFVb" target="_blank" class="social-icon location-icon" style="animation-delay: 0.45s;" aria-label="Our store location">
+      <img src="https://img.icons8.com/color/48/marker.png" alt="Location" width="32" height="32">
+    </a>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item"><span>🫧</span> Panda Humidifiers</div>
+    <div class="marquee-item"><span>💧</span> Thermal Water Bottles</div>
+    <div class="marquee-item"><span>🚢</span> Worldwide Shipping</div>
+    <div class="marquee-item"><span>📦</span> Bulk Discounts</div>
+    <div class="marquee-item"><span>✅</span> Quality Assured</div>
+    <div class="marquee-item"><span>⚡</span> Fast Dispatch</div>
+    <div class="marquee-item"><span>🐼</span> Cute Designs</div>
+    <div class="marquee-item"><span>🌿</span> Eco Friendly</div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item"><span>🫧</span> Panda Humidifiers</div>
+    <div class="marquee-item"><span>💧</span> Thermal Water Bottles</div>
+    <div class="marquee-item"><span>🚢</span> Worldwide Shipping</div>
+    <div class="marquee-item"><span>📦</span> Bulk Discounts</div>
+    <div class="marquee-item"><span>✅</span> Quality Assured</div>
+    <div class="marquee-item"><span>⚡</span> Fast Dispatch</div>
+    <div class="marquee-item"><span>🐼</span> Cute Designs</div>
+    <div class="marquee-item"><span>🌿</span> Eco Friendly</div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="sec-header reveal">
+    <div class="sec-tag tag-cyan">Our Collection</div>
+    <h2>Trending <span style="background:linear-gradient(135deg,var(--accent),#00aaff);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent">Products</span></h2>
+    <p>High-demand lifestyle products for resellers, retailers &amp; gifting businesses</p>
+  </div>
+  <div class="products-grid">
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg1">
+        <div class="carousel">
+          <img src="./images/Nice_Water_Bottle/1.jpg" alt="Insulated thermal water bottle view 1" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/2.jpg" alt="Insulated thermal water bottle view 2" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/3.jpg" alt="Insulated thermal water bottle view 3" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/4.jpg" alt="Insulated thermal water bottle view 4" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/5.jpg" alt="Insulated thermal water bottle view 5" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/6.jpeg" alt="Insulated thermal water bottle view 6" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/7.jpeg" alt="Insulated thermal water bottle view 7" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/8.jpeg" alt="Insulated thermal water bottle view 8" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/9.jpeg" alt="Insulated thermal water bottle view 9" loading="lazy">
+          <img src="./images/Nice_Water_Bottle/10.jpeg" alt="Insulated thermal water bottle view 10" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>NICE BOTTLE</h3>
+        <p>Double-wall glass, keeps drinks cold 24h / hot 12h. BPA-free, leak-proof lid.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">500ml</span><span class="prod-tag">750ml</span><span class="prod-tag">1L</span>
+        </div>
+        <div class="prod-price">₹ 35 per pcs </div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg2">
+        <div class="carousel">
+          <img src="./images/CACTUS_LOVE_Bottle/1.jpeg" alt="Cactus love water bottle view 1" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/2.jpeg" alt="Cactus love water bottle view 2" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/3.jpeg" alt="Cactus love water bottle view 3" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/4.jpeg" alt="Cactus love water bottle view 4" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/5.jpeg" alt="Cactus love water bottle view 5" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/6.jpeg" alt="Cactus love water bottle view 6" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/7.jpeg" alt="Cactus love water bottle view 7" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/8.jpeg" alt="Cactus love water bottle view 8" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/9.jpeg" alt="Cactus love water bottle view 9" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/5.jpeg" alt="Cactus love water bottle view 10" loading="lazy">
+          <img src="./images/CACTUS_LOVE_Bottle/4.jpeg" alt="Cactus love water bottle view 11" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>CACTUS LOVE BOTTLE</h3>
+        <p>Charming cactus-themed glass water bottle. Keeps drinks hot/cold for hours, eco-friendly design.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">500ml</span><span class="prod-tag">750ml</span><span class="prod-tag">1L</span>
+        </div>
+        <div class="prod-price">₹ 42 per pcs</div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg3">
+        <div class="carousel">
+          <img src="./images/Frosted_Glass_Water_Bottle/1.jpeg" alt="Frosted glass water bottle view 1" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/2.jpeg" alt="Frosted glass water bottle view 2" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/3.jpeg" alt="Frosted glass water bottle view 3" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/4.jpeg" alt="Frosted glass water bottle view 4" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/5.jpeg" alt="Frosted glass water bottle view 5" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/6.jpeg" alt="Frosted glass water bottle view 6" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/7.jpeg" alt="Frosted glass water bottle view 7" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/8.jpeg" alt="Frosted glass water bottle view 8" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/9.jpeg" alt="Frosted glass water bottle view 9" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/5.jpeg" alt="Frosted glass water bottle view 10" loading="lazy">
+          <img src="./images/Frosted_Glass_Water_Bottle/6.jpeg" alt="Frosted glass water bottle view 11" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>FROSTED GLASS BOTTLE</h3>
+        <p>Elegant frosted glass water bottle with bamboo lid. Insulates well, stylish and sustainable for daily use.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">500ml</span><span class="prod-tag">750ml</span><span class="prod-tag">Frosted</span>
+        </div>
+        <div class="prod-price">₹ 42 per pcs</div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg4">
+        <div class="carousel">
+          <img src="./images/Hello_Master_Water_Bottle/1.jpeg" alt="Hello master water bottle view 1" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/2.jpeg" alt="Hello master water bottle view 2" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/3.jpeg" alt="Hello master water bottle view 3" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/4.jpeg" alt="Hello master water bottle view 4" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/5.jpeg" alt="Hello master water bottle view 5" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/6.jpeg" alt="Hello master water bottle view 6" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/7.jpeg" alt="Hello master water bottle view 7" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/8.jpeg" alt="Hello master water bottle view 8" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/9.jpeg" alt="Hello master water bottle view 9" loading="lazy">
+          <img src="./images/Hello_Master_Water_Bottle/10.jpeg" alt="Hello master water bottle view 10" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>HELLO MASTER BOTTLE</h3>
+        <p>Fun hello-themed insulated glass water bottle. Double-wall vacuum, keeps beverages at ideal temperature.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">500ml</span><span class="prod-tag">Insulated</span><span class="prod-tag">Themed</span>
+        </div>
+        <div class="prod-price">₹ 42 per pcs</div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg5">
+        <div class="carousel">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/1.jpeg" alt="Premium glass water bottle with silicone cover view 1" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/2.jpeg" alt="Premium glass water bottle with silicone cover view 2" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/3.jpeg" alt="Premium glass water bottle with silicone cover view 3" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/4.jpeg" alt="Premium glass water bottle with silicone cover view 4" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/5.jpeg" alt="Premium glass water bottle with silicone cover view 5" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/6.jpeg" alt="Premium glass water bottle with silicone cover view 6" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/7.jpeg" alt="Premium glass water bottle with silicone cover view 7" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/8.jpeg" alt="Premium glass water bottle with silicone cover view 8" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/3.jpeg" alt="Premium glass water bottle with silicone cover view 9" loading="lazy">
+          <img src="./images/Premium_Glass_Water_Bottle_with_Silicone_Cover/4.jpeg" alt="Premium glass water bottle with silicone cover view 10" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>PREMIUM GLASS BOTTLE</h3>
+        <p>Borosilicate glass with silicone sleeve. Minimalist design, dishwasher-safe, 550ml premium bottle.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">Borosilicate</span><span class="prod-tag">Sleeve</span><span class="prod-tag">550ml</span>
+        </div>
+        <div class="prod-price">₹ 42 per pcs</div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg6">
+        <div class="carousel">
+          <img src="./images/panda_img/1.png" alt="Panda humidifier view 1" loading="lazy">
+          <img src="./images/panda_img/2.png" alt="Panda humidifier view 2" loading="lazy">
+          <img src="./images/panda_img/3.jpg" alt="Panda humidifier view 3" loading="lazy">
+          <img src="./images/panda_img/4.png" alt="Panda humidifier view 4" loading="lazy">
+          <img src="./images/panda_img/5.png" alt="Panda humidifier view 5" loading="lazy">
+          <img src="./images/panda_img/6.png" alt="Panda humidifier view 6" loading="lazy">
+          <img src="./images/panda_img/7.png" alt="Panda humidifier view 7" loading="lazy">
+          <img src="./images/panda_img/8.png" alt="Panda humidifier view 8" loading="lazy">
+          <img src="./images/panda_img/9.jpg" alt="Panda humidifier view 9" loading="lazy">
+          <img src="./images/panda_img/10.png" alt="Panda humidifier view 10" loading="lazy">
+          <img src="./images/panda_img/11.png" alt="Panda humidifier view 11" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>PANDA HUMIDIFIER</h3>
+        <p>Cute panda-shaped USB humidifier. Adds moisture to air, LED lights, perfect for kids' rooms or desks.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">USB</span><span class="prod-tag">LED</span><span class="prod-tag">Kids</span>
+        </div>
+        <div class="prod-price">₹ 120 per pcs</div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg1">
+        <div class="carousel">
+          <img src="./images/magic_ball/1.jpg" alt="Magic ball toy view 1" loading="lazy">
+          <img src="./images/magic_ball/2.jpg" alt="Magic ball toy view 2" loading="lazy">
+          <img src="./images/magic_ball/3.jpg" alt="Magic ball toy view 3" loading="lazy">
+          <img src="./images/magic_ball/4.jpg" alt="Magic ball toy view 4" loading="lazy">
+          <img src="./images/magic_ball/5.jpg" alt="Magic ball toy view 5" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>MAGIC BALL</h3>
+        <p>Interactive floating magic ball toy with LED lights. Perfect for kids' entertainment and party favors.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">LED</span><span class="prod-tag">Floating</span><span class="prod-tag">Kids</span>
+        </div>
+        <div class="prod-price">₹ 100 per pcs</div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg2">
+        <div class="carousel">
+          <img src="./images/writing_pad/1.jpg" alt="Writing pad view 1" loading="lazy">
+          <img src="./images/writing_pad/2.jpg" alt="Writing pad view 2" loading="lazy">
+          <img src="./images/writing_pad/3.jpg" alt="Writing pad view 3" loading="lazy">
+          <img src="./images/writing_pad/4.jpg" alt="Writing pad view 4" loading="lazy">
+          <img src="./images/writing_pad/5.png" alt="Writing pad view 5" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>WRITING PAD</h3>
+        <p>Reusable LCD writing tablet with stylus. Eco-friendly, erasable surface perfect for kids learning and doodling.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">LCD</span><span class="prod-tag">Reusable</span><span class="prod-tag">Eco-friendly</span>
+        </div>
+        <div class="prod-price">₹ 50 per pcs</div>
+      </div>
+    </div>
+
+    <div class="product-card reveal">
+      <div class="prod-img prod-bg3">
+        <div class="carousel">
+          <img src="./images/Magic_books/1.jpg" alt="Magic book view 1" loading="lazy">
+          <img src="./images/Magic_books/2.jpg" alt="Magic book view 2" loading="lazy">
+          <img src="./images/Magic_books/3.jpg" alt="Magic book view 3" loading="lazy">
+          <img src="./images/Magic_books/4.jpg" alt="Magic book view 4" loading="lazy">
+          <img src="./images/Magic_books/5.jpg" alt="Magic book view 5" loading="lazy">
+          <img src="./images/Magic_books/6.jpg" alt="Magic book view 6" loading="lazy">
+        </div>
+      </div>
+      <div class="prod-info">
+        <h3>MAGIC BOOK</h3>
+        <p>Interactive pop-up magic book with surprise elements. Educational and entertaining for children of all ages.</p>
+        <div class="prod-tags">
+          <span class="prod-tag">Interactive</span><span class="prod-tag">Educational</span><span class="prod-tag">Pop-up</span>
+        </div>
+        <div class="prod-price">₹ 22 per pcs</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- BULK ORDER -->
+<section id="bulk">
+  <div class="bulk-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-tag tag-gold">💰 Bulk Pricing</div>
+      <h2>Wholesale <span style="background:linear-gradient(135deg,var(--accent3),#ff6b9d);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent">Order Plans</span></h2>
+      <p>The more you order, the more you save. Contact us for custom quotes above 500 units.</p>
+    </div>
+    <div class="bulk-grid">
+
+      <div class="bulk-card reveal">
+        <div class="bulk-tier">Starter</div>
+        <div class="bulk-qty">25–50 <span>units</span></div>
+        <!-- <div class="bulk-price">₹ 250 <span class="unit">/ unit avg</span></div> -->
+        <ul class="bulk-features">
+          <li>Mix of products allowed</li>
+          <li>Standard packaging</li>
+          <li>7–10 day dispatch</li>
+          <li>WhatsApp support</li>
+          <li>Basic invoice</li>
+        </ul>
+        <a href="https://wa.me/9025570064" target="_blank" class="bulk-btn bulk-btn-ghost">Chat on WhatsApp</a>
+      </div>
+
+      <div class="bulk-card featured reveal">
+        <div class="bulk-tier">Growth</div>
+        <div class="bulk-qty">100–250 <span>units</span></div>
+        <!-- <div class="bulk-price">₹ 200 <span class="unit">/ unit avg</span></div> -->
+        <ul class="bulk-features">
+          <li>Free brand sticker labeling</li>
+          <li>Custom color selection</li>
+          <li>5–7 day priority dispatch</li>
+          <li>Dedicated account manager</li>
+          <li>GST invoice included</li>
+          <li>Free samples on first order</li>
+        </ul>
+        <a href="https://wa.me/9025570064" target="_blank" class="bulk-btn bulk-btn-solid">Order Now →</a>
+      </div>
+
+      <div class="bulk-card reveal">
+        <div class="bulk-tier">Enterprise</div>
+        <div class="bulk-qty">500+ <span>units</span></div>
+        <!-- <div class="bulk-price">₹ 160 <span class="unit">/ unit avg</span></div> -->
+        <ul class="bulk-features">
+          <li>Full OEM/custom branding</li>
+          <li>Private label packaging</li>
+          <li>3–5 day express dispatch</li>
+          <li>Export documentation</li>
+          <li>Free shipping (select zones)</li>
+          <li>Exclusive wholesale price</li>
+        </ul>
+        <a href="https://wa.me/9025570064" target="_blank" class="bulk-btn bulk-btn-ghost">Request Quote</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-tag tag-gold">⭐ What Buyers Say</div>
+      <h2>Customer <span style="background:linear-gradient(135deg,var(--accent3),#ff6b9d);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent">Testimonials</span></h2>
+      <p>Real feedback from our wholesale clients across India and worldwide</p>
+    </div>
+
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Excellent quality and competitive pricing. Their Panda Humidifiers are bestsellers in our store. Highly recommended!"</p>
+        <p class="testimonial-author">— Rohith, Krishnagiri,Tamilnadu</p>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Fast shipping to our warehouse. Products arrived in perfect condition. Will definitely order again."</p>
+        <p class="testimonial-author">— Chinnu, Kerala</p>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Best bulk pricing on  water bottles. MDU Cart offers great value without compromising quality."</p>
+        <p class="testimonial-author">— Vishva , Erode,Tamilnadu</p>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Customer support is responsive and helpful. They guided us through export documentation seamlessly."</p>
+        <p class="testimonial-author">— Kiran , Andhra</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHIPPING -->
+<section id="shipping">
+  <div class="shipping-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-tag tag-pink">🚚 Logistics</div>
+      <h2>Shipping &amp; <span style="background:linear-gradient(135deg,var(--accent2),var(--accent3));background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent">Import Process</span></h2>
+      <p>Transparent, fast, and reliable — from our warehouse to your doorstep</p>
+    </div>
+
+    <div class="shipping-flow">
+      <div class="ship-step reveal">
+        <span class="ship-icon">🛒</span>
+        <h4>Place Order</h4>
+        <p>Contact via WhatsApp or instagram with product list &amp; quantity</p>
+      </div>
+      <div class="ship-arrow reveal">→</div>
+      <div class="ship-step reveal">
+        <span class="ship-icon">✅</span>
+        <h4>Confirm & Pay</h4>
+        <p>Receive proforma invoice, pay via UPI / bank transfer / SWIFT</p>
+      </div>
+      <div class="ship-arrow reveal">→</div>
+      <div class="ship-step reveal">
+        <span class="ship-icon">📦</span>
+        <h4>Pack & Dispatch</h4>
+        <p>Products quality-checked, packed &amp; shipped with tracking ID</p>
+      </div>
+      <div class="ship-arrow reveal">→</div>
+      <div class="ship-step reveal">
+        <span class="ship-icon">🚢</span>
+        <h4>In Transit</h4>
+        <p>Domestic courier or international freight (DHL / FedEx / EMS)</p>
+      </div>
+      <div class="ship-arrow reveal">→</div>
+      <div class="ship-step reveal">
+        <span class="ship-icon">🎉</span>
+        <h4>Delivered!</h4>
+        <p>Door delivery with full documentation for import clearance</p>
+      </div>
+    </div>
+
+    <div class="countries-banner reveal">
+      <h4>🌍 We Ship To</h4>
+      <div class="flag-row">
+        <span class="flag-badge">🇮🇳 India</span>
+        <span class="flag-badge">🇦🇪 UAE</span>
+        <span class="flag-badge">🇸🇦 Saudi Arabia</span>
+        <span class="flag-badge">🇺🇸 USA</span>
+        <span class="flag-badge">🇬🇧 UK</span>
+        <span class="flag-badge">🇦🇺 Australia</span>
+        <span class="flag-badge">🇸🇬 Singapore</span>
+        <span class="flag-badge">🇲🇾 Malaysia</span>
+        <span class="flag-badge">🇧🇩 Bangladesh</span>
+        <span class="flag-badge">🇱🇰 Sri Lanka</span>
+        <span class="flag-badge">🇳🇵 Nepal</span>
+        <span class="flag-badge">+ More</span>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap">
+    <div class="sec-header reveal">
+      <div class="sec-tag tag-cyan">📬 Get In Touch</div>
+      <h2>Contact <span style="background:linear-gradient(135deg,var(--accent),#00aaff);background-clip:text;-webkit-background-clip:text;-webkit-text-fill-color:transparent">MDU Cart</span></h2>
+      <p>Reach us on your preferred channel — we reply fast!</p>
+    </div>
+
+    <div class="contact-grid">
+      <a href="https://wa.me/9025570064" target="_blank" class="contact-card wa-card reveal" aria-label="Contact us on WhatsApp">
+        <div class="ci">💬</div>
+        <h4>WhatsApp</h4>
+        <p>Fastest way to reach us. Send catalog requests, pricing queries or place orders directly.</p>
+        <div class="link">+91 9025570064 →</div>
+      </a>
+      <a href="https://www.instagram.com/mdu_cart/" target="_blank" class="contact-card ig-card reveal" aria-label="Follow us on Instagram">
+        <div class="ci">📸</div>
+        <h4>Instagram</h4>
+        <p>Follow us for new arrivals, unboxing reels, and exclusive deals for our followers.</p>
+        <div class="link">@mducart →</div>
+      </a>
+      <a href="mailto:dreamstore6423@gmail.com" class="contact-card mail-card reveal" aria-label="Send us an email">
+        <div class="ci">📧</div>
+        <h4>Email</h4>
+        <p>For formal quotations, export documentation, and partnership proposals.</p>
+        <div class="link">dreamstore6423@gmail.com →</div>
+      </a>
+      <a href="tel:+9025570064" class="contact-card phone-card reveal" aria-label="Call us">
+        <div class="ci">📞</div>
+        <h4>Phone / Call</h4>
+        <p>Call us directly during business hours for urgent orders &amp; queries.</p>
+        <div class="link">+91 9025570064 →</div>
+      </a>
+    </div>
+
+    <div class="contact-map reveal">
+      <h4>📍 Based In India &nbsp;·&nbsp; Shipping Worldwide</h4>
+      <p>
+        MDU Cart Wholesale Hub<br>
+        Business Hours: Mon – Sun, 8:00 AM – 8:00 PM IST<br>
+        <br>
+        🚚 Domestic orders dispatched in <strong>1–3 days</strong>&nbsp;&nbsp;|&nbsp;&nbsp;
+        🌍 International shipping in <strong>3–7 business days</strong>
+      </p>
+    </div>
+
+    <div class="newsletter reveal">
+      <h3>📧 Stay Updated</h3>
+      <p>Subscribe to get exclusive deals, new product launches, and wholesale pricing updates.</p>
+      <p style="color: var(--muted); font-size: 0.85rem; margin-top: 15px;">📬 Contact us via WhatsApp or email to join our wholesale subscriber list</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">MDU Cart</div>
+  <p>© 2025 MDU Cart — Wholesale Lifestyle Products &nbsp;·&nbsp; Made with ❤️ in India</p>
+  <p style="margin-top:6px">💬 <a href="https://wa.me/9025570064" target="_blank">WhatsApp</a> &nbsp;|&nbsp; 📸 <a href="https://www.instagram.com/mdu_cart/" target="_blank">Instagram</a> &nbsp;|&nbsp; 📍 <a href="https://share.google/Pg9uH4lt58CqvBFVb" target="_blank">Store Location</a> &nbsp;|&nbsp; 📧 <a href="mailto:dreamstore6423@gmail.com">Email</a></p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => io.observe(el));
+
+  // Wait for DOM to load before attaching modal event listeners
+  document.addEventListener('DOMContentLoaded', function() {
+    // Carousel setup for fade transition every 2 seconds
+    document.querySelectorAll('.carousel').forEach(carousel => {
+      const imgs = Array.from(carousel.querySelectorAll('img'));
+      const n = imgs.length;
+      let current = 0;
+      imgs[current].style.opacity = '1';
+      setInterval(() => {
+        imgs[current].style.opacity = '0';
+        current = (current + 1) % n;
+        imgs[current].style.opacity = '1';
+      }, 2000);
+    });
+
+    // Product card click to show modal
+    document.querySelectorAll('.product-card').forEach(card => {
+      card.addEventListener('click', function() {
+        const productName = this.querySelector('h3').textContent;
+        const productImage = this.querySelector('.carousel img').src;
+        const productPrice = this.querySelector('.prod-price').textContent;
+
+        // Show modal
+        const modal = document.getElementById('product-modal');
+        const modalImage = document.getElementById('modal-product-image');
+        const modalTitle = document.getElementById('modal-product-title');
+        const modalPrice = document.getElementById('modal-product-price');
+
+        modalImage.src = productImage;
+        modalTitle.textContent = productName;
+        modalPrice.textContent = productPrice;
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    // Modal close functionality
+    document.getElementById('modal-close').addEventListener('click', function() {
+      document.getElementById('product-modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    document.getElementById('modal-cancel').addEventListener('click', function() {
+      document.getElementById('product-modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    document.getElementById('modal-buy-now').addEventListener('click', function() {
+      const productName = document.getElementById('modal-product-title').textContent;
+      const message = encodeURIComponent(`Hi, I'm interested in ${productName}`);
+      window.open(`https://wa.me/9025570064?text=${message}`, '_blank');
+      document.getElementById('product-modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+
+    // Close modal when clicking outside
+    document.getElementById('product-modal').addEventListener('click', function(e) {
+      if (e.target.id === 'product-modal') {
+        document.getElementById('product-modal').style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
+
+  // Smooth scrolling for navigation links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Home link smooth scroll
+  document.getElementById('home-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+
+
+</script>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
+<!-- Product Modal -->
+<div id="product-modal" class="modal-overlay">
+  <div class="modal-content">
+    <button id="modal-close" class="modal-close-btn" aria-label="Close modal">&times;</button>
+    <div class="modal-image">
+      <img id="modal-product-image" src="" alt="Product image">
+    </div>
+    <div class="modal-details">
+      <h2 id="modal-product-title"></h2>
+      <div class="modal-info">
+        <div class="info-item">
+          <strong>MOQ:</strong> 100 pieces
+        </div>
+        <div class="info-item">
+          <strong>Rate:</strong> <span id="modal-product-price">42 per pcs</span>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button id="modal-buy-now" class="btn-primary">Buy Now</button>
+        <button id="modal-cancel" class="btn-secondary">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
