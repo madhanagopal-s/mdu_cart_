@@ -17,7 +17,7 @@
   :root {
     --bg: #0f0f0f;
     --text: #ffffff;
-    --muted: #b0b0b0;
+    --muted: #eee; /* brighter than before */
     --accent: #00d4ff;
     --accent2: #ff4081;
     --accent3: #ffd700;
@@ -169,15 +169,18 @@
     font-size: clamp(2.8rem, 7vw, 5.5rem);
     font-weight: 800; line-height: 1.05;
     animation: fadeUp 0.8s 0.15s ease both;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
   }
   .hero-title .grad {
     background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
     background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    text-shadow: none;
   }
   .hero-sub {
     margin: 20px auto; color: var(--muted); font-size: 1.1rem;
     max-width: 540px; line-height: 1.7;
     animation: fadeUp 0.8s 0.3s ease both;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
   }
   .hero-btns {
     display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
@@ -430,7 +433,7 @@
   }
   .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,212,255,0.2); }
   .prod-img {
-    width: 100%; height: 220px;
+    width: 100%; height: 280px;
     display: flex; align-items: center; justify-content: center;
     position: relative; overflow: hidden;
   }
@@ -516,6 +519,42 @@
     border-radius: 50px; font-weight: 700; font-size: 0.9rem;
     text-decoration: none; transition: transform .2s, box-shadow .2s; margin-top: 20px;
   }
+
+  /* ── ENHANCE READABILITY ON IMAGE BACKGROUNDS ── */
+  /* make text bright and add shadow for contrast throughout */
+  section,
+  .bulk-card,
+  .product-card,
+  .stat-card,
+  .contact-card,
+  footer {
+    color: #fff !important;
+  }
+
+  
+
+  /* ensure muted/secondary text is also white so nothing fades into background */
+  .bulk-card .bulk-tier,
+  .bulk-card .bulk-qty span,
+  .bulk-card .bulk-features li,
+  #products .prod-name,
+  #products .prod-price,
+  #stats .stat-num,
+  #stats .stat-label,
+  #contact .contact-title,
+  #contact .contact-desc,
+  .ship-step p,
+  .contact-card p,
+  .newsletter p,
+  .contact-map p,
+  .marquee-item,
+  .sec-header p,
+  .nav-links a,
+  footer,
+  footer a {
+    color: #fff !important;
+  }
+
   .bulk-btn-ghost { border: 1.5px solid rgba(255,255,255,0.2); color: var(--text); }
   .bulk-btn-ghost:hover { border-color: var(--accent); background: rgba(0,245,196,0.08); }
   .bulk-btn-solid {
@@ -687,7 +726,7 @@
   }
   .marquee-track {
     display: flex; gap: 40px; white-space: nowrap;
-    animation: marquee 3s linear infinite;
+    animation: marquee 10s linear infinite;
   }
   .marquee-item { font-size: 0.85rem; color: var(--muted); display: flex; align-items: center; gap: 10px; }
   .marquee-item span { color: var(--accent); font-size: 1.1rem; }
@@ -738,22 +777,27 @@
     .brand { font-size: 1.2rem; }
     .nav-cta { padding: 6px 12px; font-size: 0.75rem; }
     #products, #bulk, #shipping, #contact { padding: 60px 20px; }
-    /* Mobile product cards - 2 columns */
+    /* Mobile product cards - horizontal scrollable carousel */
     #products .products-grid {
-      display: grid !important;
-      grid-template-columns: 1fr 1fr !important;
+      display: flex !important;
+      flex-direction: row !important;
       gap: 12px !important;
       max-width: 100% !important;
       padding: 0 10px;
       box-sizing: border-box;
       width: 100% !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
     }
     #products .product-card {
       border-radius: 16px;
-      min-width: 0 !important;
-      flex: 1;
-      width: 100% !important;
+      min-width: 280px !important;
+      flex-shrink: 0;
+      width: 280px !important;
       box-sizing: border-box;
+      scroll-snap-align: start;
     }
     /* Mobile bulk cards - 2 columns */
     .bulk-grid {
@@ -776,7 +820,7 @@
       min-width: 0 !important;
     }
     .prod-img {
-      height: 160px;
+      height: 210px;
     }
     .prod-info {
       padding: 16px;
@@ -795,13 +839,24 @@
     .brand { display: none; }
     .nav-cta { padding: 8px 16px; font-size: 0.8rem; }
     .nav-links { width: 80%; max-width: 220px; }
-    /* Product cards for very small screens - keep 2 columns */
+    /* Product cards for very small screens - horizontal scrollable carousel */
     .products-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
+      display: flex !important;
+      flex-direction: row !important;
+      gap: 12px !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .product-card {
+      min-width: 260px !important;
+      flex-shrink: 0;
+      width: 260px !important;
+      scroll-snap-align: start;
     }
     .prod-img {
-      height: 150px;
+      height: 200px;
     }
     /* Bulk cards for very small screens - keep 2 columns */
     .bulk-grid {
@@ -816,6 +871,10 @@
       grid-template-columns: repeat(2, 1fr) !important;
       gap: 12px !important;
     }
+    /* hide translucent blobs on tiny screens */
+    .bg { display: none; }
+    /* keep hero overlay for text contrast */
+    #hero::before { opacity: 0.25 !important; }
   }
 </style>
 <script type="application/ld+json">
@@ -828,7 +887,7 @@
   "description": "Wholesale supplier of premium lifestyle products including insulated water bottles, panda humidifiers, and sports accessories. Bulk pricing for retailers and businesses.",
   "contactPoint": {
     "@type": "ContactPoint",
-    "telephone": "+91-99999-99999",
+    "telephone": "+91-9025570064",
     "contactType": "customer service",
     "availableLanguage": "English"
   },
@@ -907,7 +966,7 @@
         <div class="lbl">Satisfaction Rate</div>
       </div>
       <div class="stat-card reveal">
-        <div class="num">3–7</div>
+        <div class="num">1-2</div>
         <div class="lbl">Days Delivery</div>
       </div>
     </div>
@@ -921,7 +980,7 @@
     <a href="https://www.instagram.com/mdu_cart/" target="_blank" class="social-icon ig-icon" style="animation-delay: 0.15s;" aria-label="Follow us on Instagram">
       <img src="https://img.icons8.com/color/48/instagram-new.png" alt="Instagram" width="32" height="32">
     </a>
-    <a href="tel:+9025570064" class="social-icon phone-icon" style="animation-delay: 0.3s;" aria-label="Call us">
+    <a href="tel:+919025570064" class="social-icon phone-icon" style="animation-delay: 0.3s;" aria-label="Call us">
       <img src="https://img.icons8.com/color/48/phone.png" alt="Phone" width="32" height="32">
     </a>
     <a href="https://share.google/Pg9uH4lt58CqvBFVb" target="_blank" class="social-icon location-icon" style="animation-delay: 0.45s;" aria-label="Our store location">
@@ -941,10 +1000,15 @@
     <div class="marquee-item"><span>⚡</span> Fast Dispatch</div>
     <div class="marquee-item"><span>🐼</span> Cute Designs</div>
     <div class="marquee-item"><span>🌿</span> Eco Friendly</div>
-    <!-- duplicate for seamless loop -->
+    <!-- duplicate for seamless loop - full set -->
     <div class="marquee-item"><span>🫧</span> Panda Humidifiers</div>
     <div class="marquee-item"><span>💧</span> Thermal Water Bottles</div>
     <div class="marquee-item"><span>🚢</span> Worldwide Shipping</div>
+    <div class="marquee-item"><span>📦</span> Bulk Discounts</div>
+    <div class="marquee-item"><span>✅</span> Quality Assured</div>
+    <div class="marquee-item"><span>⚡</span> Fast Dispatch</div>
+    <div class="marquee-item"><span>🐼</span> Cute Designs</div>
+    <div class="marquee-item"><span>🌿</span> Eco Friendly</div>
     <div class="marquee-item"><span>📦</span> Bulk Discounts</div>
     <div class="marquee-item"><span>✅</span> Quality Assured</div>
     <div class="marquee-item"><span>⚡</span> Fast Dispatch</div>
@@ -981,7 +1045,7 @@
         <h3>NICE BOTTLE</h3>
         <p>Double-wall glass, keeps drinks cold 24h / hot 12h. BPA-free, leak-proof lid.</p>
         <div class="prod-tags">
-          <span class="prod-tag">500ml</span><span class="prod-tag">750ml</span><span class="prod-tag">1L</span>
+          <span class="prod-tag">400ml</span><span class="prod-tag">Nice</span><span class="prod-tag">Gift</span>
         </div>
         <div class="prod-price">₹ 35 per pcs </div>
       </div>
@@ -1007,7 +1071,7 @@
         <h3>CACTUS LOVE BOTTLE</h3>
         <p>Charming cactus-themed glass water bottle. Keeps drinks hot/cold for hours, eco-friendly design.</p>
         <div class="prod-tags">
-          <span class="prod-tag">500ml</span><span class="prod-tag">750ml</span><span class="prod-tag">1L</span>
+          <span class="prod-tag">450ml</span><span class="prod-tag">Gift</span><span class="prod-tag">Cute</span>
         </div>
         <div class="prod-price">₹ 42 per pcs</div>
       </div>
@@ -1033,7 +1097,7 @@
         <h3>FROSTED GLASS BOTTLE</h3>
         <p>Elegant frosted glass water bottle with bamboo lid. Insulates well, stylish and sustainable for daily use.</p>
         <div class="prod-tags">
-          <span class="prod-tag">500ml</span><span class="prod-tag">750ml</span><span class="prod-tag">Frosted</span>
+          <span class="prod-tag">400ml</span><span class="prod-tag">Return gift</span><span class="prod-tag">Frosted</span>
         </div>
         <div class="prod-price">₹ 42 per pcs</div>
       </div>
@@ -1058,7 +1122,7 @@
         <h3>HELLO MASTER BOTTLE</h3>
         <p>Fun hello-themed insulated glass water bottle. Double-wall vacuum, keeps beverages at ideal temperature.</p>
         <div class="prod-tags">
-          <span class="prod-tag">500ml</span><span class="prod-tag">Insulated</span><span class="prod-tag">Themed</span>
+          <span class="prod-tag">400ml</span><span class="prod-tag">Insulated</span><span class="prod-tag">Themed</span>
         </div>
         <div class="prod-price">₹ 42 per pcs</div>
       </div>
@@ -1083,7 +1147,7 @@
         <h3>PREMIUM GLASS BOTTLE</h3>
         <p>Borosilicate glass with silicone sleeve. Minimalist design, dishwasher-safe, 550ml premium bottle.</p>
         <div class="prod-tags">
-          <span class="prod-tag">Borosilicate</span><span class="prod-tag">Sleeve</span><span class="prod-tag">550ml</span>
+          <span class="prod-tag">Borosilicate</span><span class="prod-tag">Sleeve</span><span class="prod-tag">400ml</span>
         </div>
         <div class="prod-price">₹ 42 per pcs</div>
       </div>
@@ -1250,7 +1314,7 @@
       <div class="testimonial-card reveal">
         <div class="stars">⭐⭐⭐⭐⭐</div>
         <p class="testimonial-text">"Excellent quality and competitive pricing. Their Panda Humidifiers are bestsellers in our store. Highly recommended!"</p>
-        <p class="testimonial-author">— Rohith, Krishnagiri,Tamilnadu</p>
+        <p class="testimonial-author">— Rohith,Tamilnadu</p>
       </div>
 
       <div class="testimonial-card reveal">
@@ -1364,7 +1428,7 @@
         <p>For formal quotations, export documentation, and partnership proposals.</p>
         <div class="link">dreamstore6423@gmail.com →</div>
       </a>
-      <a href="tel:+9025570064" class="contact-card phone-card reveal" aria-label="Call us">
+      <a href="tel:+919025570064" class="contact-card phone-card reveal" aria-label="Call us">
         <div class="ci">📞</div>
         <h4>Phone / Call</h4>
         <p>Call us directly during business hours for urgent orders &amp; queries.</p>
